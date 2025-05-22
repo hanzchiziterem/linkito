@@ -5,24 +5,19 @@ export const createLink = async (req, res) => {
   const { url } = req.body;
   try {
     const isUrlValid = isVaildUrl(url);
-    if (!isUrlValid) res.status(400).json({message: "This is not a valid URL."});
-
-    const newLink = new Link({
-      url
-    });
-
-    if (newLink) {
-      await newLink.save();
-      res.status(201).json({
-        _id: newLink._id,
-        url: newLink.url,
-      });
-    } else {
-      res.status(400).json({ message: "Invalid URL." });
+    if (!url || !isUrlValid) {
+      return res.status(400).json({ message: "This is not a valid URL." });
     }
 
+    const newLink = new Link({ url });
+    await newLink.save();
+
+    return res.status(201).json({
+      _id: newLink._id,
+      url: newLink.url,
+    });
   } catch (error) {
-    console.log(error);
+    console.error("Error saving link:", error);
     res.status(500).json({ message: `Server Error.` });
   }
 };
