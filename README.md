@@ -31,7 +31,7 @@ In a world of dry utilities, linkto brings personality. It’s built with joy, a
 
 2. Install dependencies:
    ```bash
-   cd snip-snap
+   cd linkto
    npm install
 
 3. Create a .env file:
