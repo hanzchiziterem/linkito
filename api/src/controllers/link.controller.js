@@ -1,0 +1,28 @@
+import isVaildUrl from "../config/isValidUrl.js";
+import Link from "../model/link.model.js";
+
+export const createLink = async (req, res) => {
+  const { url } = req.body;
+  try {
+    const isUrlValid = isVaildUrl(url);
+    if (!isUrlValid) res.status(400).json({message: "This is not a valid URL."});
+
+    const newLink = new Link({
+      url
+    });
+
+    if (newLink) {
+      await newLink.save();
+      res.status(201).json({
+        _id: newLink._id,
+        url: newLink.url,
+      });
+    } else {
+      res.status(400).json({ message: "Invalid URL." });
+    }
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: `Server Error.` });
+  }
+};
