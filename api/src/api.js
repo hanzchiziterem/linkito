@@ -3,7 +3,7 @@ import express from "express";
 import cors from "cors";
 import connectToDatabase from "./config/connectToDatabase.js";
 
-import linkRoutes from "./routes/link.route.js";
+import urlRoutes from "./routes/url.route.js";
 
 //.env for files.
 config();
@@ -15,7 +15,7 @@ app.use(express.json())
 app.use(cors());
 
 //Routes
-app.use("/api/create", linkRoutes)
+app.use("/api/create", urlRoutes)
 
 const PORT = process.env.PORT;
 
