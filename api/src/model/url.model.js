@@ -1,9 +1,9 @@
-import nanoid from "nanoid";
 import mongoose from "mongoose";
+import {nanoid} from "nanoid";
 
 const urlSchema = mongoose.Schema(
   {
-    orignalUrl: { type: String, required: true },
+    originalUrl: { type: String, required: true },
     shortId: {
       type: String,
       required: true,
