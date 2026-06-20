@@ -1,8 +1,8 @@
 import axios from "axios";
-import AppErorr from "./app-error";
+import AppError from "./app-error.js";
 
 const handleAxiosError = (error) => {
-  if (error instanceof AppErorr) return error;
+  if (error instanceof AppError) return error;
 
   if (axios.isAxiosError(error)) {
     const message =
@@ -12,7 +12,7 @@ const handleAxiosError = (error) => {
   }
 
   if (error instanceof Error) {
-    return new AppError(error.message, 500, false);
+    return new Error(error.message, 500, false);
   }
 
   return new AppError("An unknown error occurred.", 500, false);
